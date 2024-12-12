@@ -1,3 +1,4 @@
+
 # Sistema Voluntariado
 
 Este proyecto es una aplicación web para la gestión de proyectos y usuarios. La aplicación permite a los usuarios registrarse, iniciar sesión, unirse a proyectos, buscar proyectos y gestionar su participación en ellos, además de poder eliminar y editar estos.
@@ -77,6 +78,7 @@ Directorio generado por el entorno virtual, que contiene las bibliotecas y depen
 - `.env`: Contiene configuraciones sensibles como la conexión a MongoDB o claves secretas.
 - `requirements.txt`: Lista de todas las dependencias de Python necesarias para el proyecto.
 - `run.py`: Archivo principal que inicia la aplicación Flask. Este archivo configura el servidor y corre la aplicación.
+=======
 
 ---
 
