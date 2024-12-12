@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Bienvenido al Dashboard</h2>
+        <div id="welcome-message" class="welcome-message"></div>
+
+        <!-- Sección de Proyectos donde estás registrado -->
+        <section class="section">
+            <h3>Mis Proyectos</h3>
+            <ul id="my-projects" class="project-list">
+                <!-- Aquí se cargarán los proyectos donde el usuario es voluntario -->
+            </ul>
+        </section>
+
+    
+
+        <!-- Sección para Buscar Proyectos -->
+        <section class="section">
+            <h3>Buscar Proyectos</h3>
+            <form id="filter-project-form" class="form">
+                <label for="filter-name">Nombre del Proyecto:</label>
+                <input type="text" id="filter-name" placeholder="Nombre del proyecto">
+
+                <label for="filter-country">País:</label>
+                <input type="text" id="filter-country" placeholder="País">
+
+                <button type="submit" class="btn">Buscar</button>
+                <button type="button" id="clear-filter" class="btn btn-danger">Borrar Búsqueda</button>
+            </form>
+            <ul id="filtered-projects" class="project-list"></ul>
+        </section>
+
+        <!-- Sección de Proyectos Disponibles -->
+        <section class="section">
+            <h3>Proyectos Disponibles</h3>
+            <button id="toggle-available-projects" class="btn">Mostrar Proyectos Disponibles</button>
+            <ul id="available-projects" class="project-list" style="display: none;">
+                <!-- Aquí se cargarán los proyectos disponibles con botones de Ver Detalles, Unirme y Eliminar -->
+            </ul>
+        </section>
+
+        <!-- Sección para Ver Todos los Usuarios -->
+        <section class="section">
+            <h3>Usuarios Registrados</h3>
+            <button id="load-users-btn" class="btn">Ver Usuarios</button>
+            <button id="hide-users-btn" class="btn btn-danger" style="display: none;">Ocultar Usuarios</button>
+            <ul id="users-list" class="project-list">
+                <!-- Aquí se cargarán los usuarios registrados -->
+            </ul>
+        </section>
+        
+
+        <!-- Formulario de edición (oculto por defecto) -->
+        <div id="edit-form-container" style="display: none;">
+            <h3>Editar Proyecto</h3>
+            <form id="edit-project-form" class="form">
+                <label for="edit-project-name">Nombre:</label>
+                <input type="text" id="edit-project-name" required>
+
+                <label for="edit-project-description">Descripción:</label>
+                <textarea id="edit-project-description" required></textarea>
+
+                <label for="edit-project-country">País:</label>
+                <input type="text" id="edit-project-country" required>
+
+                <button type="submit" class="btn">Guardar Cambios</button>
+            </form>
+        </div>
+
+        
+
+       <!-- Sección para Crear Proyecto -->
+        <section class="section">
+            <h3>Crear Proyecto</h3>
+            <button id="toggle-create-project" class="btn">Mostrar Formulario de Creación</button>
+            <form id="create-project-form" class="form" style="display: none;">
+                <label for="project-name">Nombre del proyecto:</label>
+                <input type="text" id="project-name" placeholder="Ingresa el nombre" required>
+            
+                <label for="project-description">Descripción:</label>
+                <textarea id="project-description" placeholder="Ingresa la descripción" required></textarea>
+            
+                <label for="project-country">País:</label>
+                <input type="text" id="project-country" placeholder="Ingresa el país" required>
+            
+                <button type="submit" class="btn">Crear Proyecto</button>
+            </form>
+        </section>
+
+
+        <!-- Botón de Cerrar Sesión -->
+        <section class="section">
+            <button id="logout-btn" class="btn btn-danger">Cerrar Sesión</button>
+        </section>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
