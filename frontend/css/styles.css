@@ -32,19 +32,19 @@ p {
 ul {
     list-style-type: none;
     padding: 0;
-    margin: 20px 0; /* Más separación para la lista */
+    margin: 20px 0; 
 }
 
 li {
     background: #f9f9f9;
-    padding: 15px; /* Más espacio interno */
-    margin: 10px 0; /* Más separación entre elementos */
+    padding: 15px; 
+    margin: 10px 0; 
     border: 1px solid #ddd;
     border-radius: 5px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 14px; /* Texto más consistente */
+    font-size: 14px; 
 }
 
 button {
@@ -55,7 +55,7 @@ button {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    font-size: 14px; /* Consistencia en el tamaño del texto */
+    font-size: 14px; 
 }
 
 button:hover {
@@ -74,7 +74,7 @@ input, textarea {
     border: 1px solid #ddd;
     border-radius: 5px;
     font-size: 14px;
-    font-family: Arial, sans-serif; /* Consistencia en la fuente */
+    font-family: Arial, sans-serif; 
 }
 
 textarea {
@@ -82,9 +82,9 @@ textarea {
 }
 
 form {
-    margin-top: 20px; /* Separar formulario de otros elementos */
+    margin-top: 20px; 
     font-size: 14px;
-    font-family: Arial, sans-serif; /* Consistencia en la fuente */
+    font-family: Arial, sans-serif; 
 }
 
 label {
@@ -96,7 +96,7 @@ label {
 
 #logout-btn {
     background-color: #dc3545;
-    margin-top: 15px; /* Más separación entre botones */
+    margin-top: 15px; 
 }
 
 #logout-btn:hover {
@@ -104,13 +104,13 @@ label {
 }
 
 h3 {
-    margin-top: 20px; /* Separar título de los botones o formularios */
+    margin-top: 20px; 
 }
 
 button + button {
-    margin-left: 10px; /* Separar botones en el mismo contenedor */
+    margin-left: 10px; 
 }
-/* General */
+
 body {
     font-family: Arial, sans-serif;
     background-color: #f9f9f9;
@@ -131,14 +131,12 @@ body {
     padding: 20px;
 }
 
-/* Ocultar contenedores dinámicos inicialmente */
 #user-projects-section,
 #available-projects-section,
 #create-project-section {
-    display: none; /* Ocultos por defecto */
+    display: none; 
 }
 
-/* Botón de cerrar sesión */
 .btn-logout {
     background-color: #e74c3c;
     color: white;
@@ -214,21 +212,21 @@ body {
     padding: 10px;
     border-radius: 5px;
     display: flex;
-    justify-content: space-between; /* Alinea elementos extremos */
+    justify-content: space-between;
     align-items: center;
 }
 
 .project-list li span {
-    flex-grow: 1; /* Ocupa el espacio restante */
+    flex-grow: 1; 
 }
 
 .project-list li button {
     margin-left: 5px;
 }
 .project-list li .button-group {
-    margin-left: auto; /* Empuja los botones hacia la derecha */
+    margin-left: auto; 
     display: flex;
-    gap: 10px; /* Añade espacio entre los botones */
+    gap: 10px; 
 }
 .container {
     max-width: 800px;
@@ -247,7 +245,6 @@ body {
     border-radius: 5px;
     background-color: #f9f9f9;
 }
-/* General Styles */
 body {
     font-family: Arial, sans-serif;
     background-color: #f9f9f9;
@@ -314,14 +311,13 @@ h2, h3 {
     opacity: 0.9;
 }
 
-/* Styles for Edit Form */
 #edit-form-container {
     background: #f9f9f9;
     padding: 20px;
     margin: 20px 0;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    display: none; /* Initially hidden */
+    display: none; 
 }
 
 #edit-form-container h3 {
@@ -361,7 +357,6 @@ h2, h3 {
     opacity: 0.9;
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
     .container {
         padding: 10px;
@@ -430,7 +425,6 @@ h2, h3 {
     border: 1px solid #ddd;
     border-radius: 5px;
 }
-/* Usuarios Registrados */
 .project-list li {
     list-style: none;
     margin-bottom: 10px;

@@ -82,10 +82,9 @@ if (window.location.pathname.endsWith("dashboard.html")) {
         loadAvailableProjects();
         setupFilterProjects();
         setupCreateProject();
-        setupViewUsers(); // Inicializar la función para ver usuarios
+        setupViewUsers(); 
         setupLogout();
 
-        // Mostrar mensaje de bienvenida
         fetch("http://127.0.0.1:5000/protected", {
             method: "GET",
             headers: { "Authorization": `Bearer ${accessToken}` },
@@ -102,6 +101,9 @@ if (window.location.pathname.endsWith("dashboard.html")) {
        
     });
 
+
+
+    //Logica cargas proyectos del usuario
     function loadUserProjects() {
         const accessToken = localStorage.getItem("access_token");
     
@@ -139,12 +141,12 @@ if (window.location.pathname.endsWith("dashboard.html")) {
     }
     
     
-    
+
+    //Logica boton proyectos disponibles
     document.addEventListener("DOMContentLoaded", function () {
         const toggleAvailableProjectsButton = document.getElementById("toggle-available-projects");
         const availableProjectsList = document.getElementById("available-projects");
     
-        // Inicialmente oculto
         toggleAvailableProjectsButton.addEventListener("click", function () {
             if (availableProjectsList.style.display === "none") {
                 availableProjectsList.style.display = "block";
@@ -286,14 +288,14 @@ if (window.location.pathname.endsWith("dashboard.html")) {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${accessToken}`,
             },
-            body: JSON.stringify({ nombre, descripcion, pais }), // Incluye "pais" aquí
+            body: JSON.stringify({ nombre, descripcion, pais }),  
         })
             .then((response) => response.json())
             .then(() => {
                 alert("Proyecto actualizado exitosamente.");
                 document.getElementById("edit-form-container").style.display = "none";
-                loadAvailableProjects(); // Recargar lista de proyectos disponibles
-                loadUserProjects(); // Recargar lista de proyectos del usuario
+                loadAvailableProjects(); 
+                loadUserProjects(); 
             })
             .catch((error) => {
                 console.error("Error al actualizar proyecto:", error);
@@ -302,7 +304,7 @@ if (window.location.pathname.endsWith("dashboard.html")) {
     }
     
 
-    // Función para configurar el filtro de proyectos
+    // Función para configurar el buscar proyectos
     function setupFilterProjects() {
         const filterProjectForm = document.getElementById("filter-project-form");
         const clearFilterButton = document.getElementById("clear-filter");
@@ -317,7 +319,7 @@ if (window.location.pathname.endsWith("dashboard.html")) {
             // Verificar que al menos uno de los campos tenga un valor
             if (!filterName && !filterCountry) {
                 alert("Por favor, ingresa al menos un criterio de búsqueda.");
-                return; // Salir de la función si no hay criterios de búsqueda
+                return; 
             }
     
             let url = "http://127.0.0.1:5000/search_projects?";
@@ -349,16 +351,16 @@ if (window.location.pathname.endsWith("dashboard.html")) {
             document.getElementById("filter-name").value = "";
             document.getElementById("filter-country").value = "";
             const filteredProjectsList = document.getElementById("filtered-projects");
-            filteredProjectsList.innerHTML = ""; // Limpiar resultados
+            filteredProjectsList.innerHTML = ""; 
         });
     }
     
+
     //boton mostrar crear
     document.addEventListener("DOMContentLoaded", function () {
         const toggleCreateProjectButton = document.getElementById("toggle-create-project");
         const createProjectForm = document.getElementById("create-project-form");
     
-        // Aseguramos que el formulario esté inicialmente oculto
         createProjectForm.style.display = "none";
     
         // Lógica del botón Mostrar/Ocultar
@@ -418,7 +420,6 @@ if (window.location.pathname.endsWith("dashboard.html")) {
                         projectDescriptionInput.value = "";
                         projectCountryInput.value = "";
     
-                        // Recargar los proyectos disponibles sin recargar la página
                         loadAvailableProjects();
                     })
                     .catch((error) => {
@@ -468,8 +469,8 @@ function joinProject(projectId) {
         .then((response) => response.json())
         .then((data) => {
             alert(data.message || "Te has unido al proyecto.");
-            loadAvailableProjects(); // Recargar lista de proyectos disponibles
-            loadUserProjects(); // Recargar lista de proyectos del usuario
+            loadAvailableProjects(); 
+            loadUserProjects(); 
         })
         .catch((error) => {
             console.error("Error al unirse al proyecto:", error);
@@ -478,6 +479,7 @@ function joinProject(projectId) {
 }
 
 
+//funcion dejar peoyecto
 function leaveProject(projectId) {
     const accessToken = localStorage.getItem("access_token");
 
@@ -490,8 +492,8 @@ function leaveProject(projectId) {
         .then((response) => response.json())
         .then((data) => {
             alert(data.message || "Has abandonado el proyecto.");
-            loadUserProjects(); // Recargar la lista de "Mis Proyectos"
-            loadAvailableProjects(); // Actualizar los proyectos disponibles
+            loadUserProjects(); 
+            loadAvailableProjects(); 
         })
         .catch((error) => {
             console.error("Error al abandonar el proyecto:", error);
@@ -500,16 +502,18 @@ function leaveProject(projectId) {
 }
 
 
+//boton ver usuarios
 document.addEventListener("DOMContentLoaded", function () {
     setupViewUsers();
 });
+
+    // Lógica para cargar usuarios
 
 function setupViewUsers() {
     const loadUsersButton = document.getElementById("load-users-btn");
     const hideUsersButton = document.getElementById("hide-users-btn");
     const usersList = document.getElementById("users-list");
 
-    // Lógica para cargar usuarios
     loadUsersButton.addEventListener("click", function () {
         const accessToken = localStorage.getItem("access_token");
 
@@ -524,14 +528,11 @@ function setupViewUsers() {
                 return response.json();
             })
             .then((data) => {
-                // Limpiar la lista de usuarios
                 usersList.innerHTML = "";
 
-                // Verificar si hay usuarios
                 if (data.length === 0) {
                     usersList.innerHTML = "<li>No hay usuarios registrados.</li>";
                 } else {
-                    // Renderizar cada usuario con un botón "Eliminar"
                     data.forEach((user) => {
                         const listItem = document.createElement("li");
                         listItem.innerHTML = `
@@ -551,7 +552,6 @@ function setupViewUsers() {
                     });
                 }
 
-                // Mostrar la lista y el botón "Ocultar Usuarios"
                 usersList.style.display = "block";
                 loadUsersButton.style.display = "none";
                 hideUsersButton.style.display = "inline-block";
@@ -585,10 +585,9 @@ function deleteUser(userId, button) {
             return response.json();
         })
         .then((data) => {
-            // Mostrar mensaje de éxito y eliminar el elemento visualmente
             alert(data.message || "Usuario eliminado exitosamente.");
             const listItem = button.parentElement;
-            listItem.remove(); // Remover del DOM después de éxito confirmado
+            listItem.remove(); 
         })
         .catch((error) => {
             console.error("Error al eliminar usuario:", error);

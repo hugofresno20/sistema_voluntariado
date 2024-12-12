@@ -1,3 +1,4 @@
+#blueprint nos permite crear modulos
 from flask import Blueprint, jsonify, request
 from flask_jwt_extended import jwt_required, get_jwt_identity, create_access_token
 from app import mongo
@@ -9,26 +10,18 @@ from datetime import timedelta
 api = Blueprint('api', __name__)
 
 
-
-# -------------------------
-# Autenticación de usuarios
-# -------------------------
-
 # Ruta para registrar un usuario
-# Ruta para registrar un usuario
+# Metodo request metodo de flask que se enlaza con lo que recibe 
 @api.route('/register', methods=['POST'])
 def register():
     data = request.get_json()
 
-    # Validar datos obligatorios
     if not data or not data.get("email") or not data.get("password"):
         return {"error": "Email y contraseña son obligatorios"}, 400
 
-    # Verificar si el usuario ya existe
     if mongo.db.usuarios.find_one({"email": data["email"]}):
         return {"error": "El usuario ya está registrado"}, 400
 
-    # Crear el usuario con contraseña hasheada
     nuevo_usuario = {
         "email": data["email"],
         "password": generate_password_hash(data["password"])
@@ -45,11 +38,9 @@ def register():
 def login():
     data = request.get_json()
 
-    # Validar datos obligatorios
     if not data or not data.get("email") or not data.get("password"):
         return {"error": "Email y contraseña son obligatorios"}, 400
 
-    # Buscar usuario y validar credenciales
     usuario = mongo.db.usuarios.find_one({"email": data["email"]})
     if not usuario or not check_password_hash(usuario["password"], data["password"]):
         return {"error": "Credenciales incorrectas"}, 401
@@ -62,7 +53,7 @@ def login():
 @api.route('/list_users', methods=['GET'])
 @jwt_required()
 def list_users():
-    # Obtener todos los usuarios de la base de datos
+
     usuarios = mongo.db.usuarios.find()
     result = []
     
@@ -70,7 +61,7 @@ def list_users():
         result.append({
             "id": str(usuario["_id"]),
             "email": usuario["email"],
-            "password": usuario["password"]  # Aunque la contraseña esté hasheada, la mostramos para pruebas
+            "password": usuario["password"]  
         })
     
     return jsonify(result), 200
@@ -83,7 +74,7 @@ def protected():
     return {"message": f"Acceso autorizado para {current_user}"}, 200
 
 
-# Ruta para obtener los detalles de un usuario por su ID (GET)
+# Ruta para obtener los detalles de un usuario por su ID 
 @api.route('/user/<id>', methods=['GET'])
 @jwt_required()
 def get_user(id):
@@ -101,7 +92,7 @@ def get_user(id):
         "id": str(usuario["_id"])
     }), 200
 
-# Ruta para actualizar un usuario por su ID (PUT)
+# Ruta para actualizar un usuario por su ID 
 @api.route('/update_user/<id>', methods=['PUT'])
 @jwt_required()
 def update_user(id):
@@ -123,14 +114,14 @@ def update_user(id):
     if "email" in data:
         update_data["email"] = data["email"]
     if "password" in data:
-        update_data["password"] = generate_password_hash(data["password"])  # Hashear la nueva contraseña
+        update_data["password"] = generate_password_hash(data["password"]) 
     
     # Actualizar el usuario en la base de datos
     mongo.db.usuarios.update_one({"_id": user_id}, {"$set": update_data})
 
     return {"message": "Usuario actualizado exitosamente"}, 200
 
-# Ruta para eliminar un usuario por su ID (DELETE)
+# Ruta para eliminar un usuario por su ID
 @api.route('/delete_user/<id>', methods=['DELETE'])
 @jwt_required()
 def delete_user(id):
@@ -141,7 +132,6 @@ def delete_user(id):
     except Exception:
         return {"error": "ID de usuario no válido"}, 400
 
-    # Eliminar el usuario de la base de datos
     result = mongo.db.usuarios.delete_one({"_id": user_id})
     if result.deleted_count == 0:
         return {"error": "Usuario no encontrado"}, 404
@@ -150,10 +140,8 @@ def delete_user(id):
 
 
 
-
-# -------------------------
 # Gestión de proyectos
-# -------------------------
+
 
 # Ruta para crear un proyecto
 @api.route('/create_project', methods=['POST'])
@@ -170,10 +158,10 @@ def create_project():
     nuevo_proyecto = {
         "nombre": data["nombre"],
         "descripcion": data["descripcion"],
-        "estado": "activo",  # Estado por defecto
-        "voluntarios": [],  # Lista vacía al inicio
-        "fecha_creacion": datetime.utcnow().isoformat(),
-        "pais": data["pais"]  # Nuevo campo de país
+        "estado": "activo", 
+        "voluntarios": [], 
+        "fecha_creacion": datetime.isoformat(),
+        "pais": data["pais"]  #
     }
     mongo.db.proyectos.insert_one(nuevo_proyecto)
     return {"message": "Proyecto creado exitosamente"}, 201
@@ -209,7 +197,6 @@ def update_project(id):
     except Exception:
         return {"error": "ID de proyecto no válido"}, 400
 
-    # Obtener datos para actualizar
     data = request.get_json()
     update_data = {}
     if "nombre" in data:
@@ -240,7 +227,6 @@ def delete_project(id):
     except Exception:
         return {"error": "ID de proyecto no válido"}, 400
 
-    # Eliminar proyecto
     result = mongo.db.proyectos.delete_one({"_id": proyecto_id})
     if result.deleted_count == 0:
         return {"error": "Proyecto no encontrado"}, 404
@@ -257,11 +243,9 @@ def join_project(project_id):
     if not proyecto:
         return jsonify({"error": "El proyecto no existe"}), 404
 
-    # Verificar si el usuario ya está en el proyecto
     if current_user in proyecto.get("voluntarios", []):
         return jsonify({"message": "Ya estás inscrito en este proyecto"}), 200
 
-    # Agregar al usuario como voluntario
     mongo.db.proyectos.update_one(
         {"_id": ObjectId(project_id)},
         {"$push": {"voluntarios": current_user}}
@@ -308,11 +292,9 @@ def leave_project(id):
     if not proyecto:
         return {"error": "Proyecto no encontrado"}, 404
 
-    # Verificar si el usuario está en la lista de voluntarios
     if current_user not in proyecto.get("voluntarios", []):
         return {"error": "El usuario no está registrado como voluntario en este proyecto"}, 400
 
-    # Eliminar el usuario de la lista de voluntarios
     mongo.db.proyectos.update_one(
         {"_id": proyecto_id},
         {"$pull": {"voluntarios": current_user}}
@@ -330,7 +312,6 @@ def project_volunteers(id):
     except Exception:
         return {"error": "ID de proyecto no válido"}, 400
 
-    # Buscar el proyecto
     proyecto = mongo.db.proyectos.find_one({"_id": proyecto_id})
     if not proyecto:
         return {"error": "Proyecto no encontrado"}, 404
@@ -348,19 +329,17 @@ def search_projects():
     nombre = request.args.get('nombre')
     fecha_inicio = request.args.get('fecha_inicio')
     fecha_fin = request.args.get('fecha_fin')
-    pais = request.args.get('pais')  # Nuevo parámetro para filtrar por país
+    pais = request.args.get('pais')  
 
-    # Convertir las fechas a formato adecuado
     if fecha_inicio:
         fecha_inicio = datetime.strptime(fecha_inicio, '%Y-%m-%d')
     if fecha_fin:
         fecha_fin = datetime.strptime(fecha_fin, '%Y-%m-%d')
 
-    # Crear el diccionario de filtros
     filtros = {}
 
     if nombre:
-        filtros["nombre"] = {"$regex": nombre, "$options": "i"}  # Filtro por nombre con $regex
+        filtros["nombre"] = {"$regex": nombre, "$options": "i"} 
     if fecha_inicio and fecha_fin:
         filtros["fecha_creacion"] = {"$gte": fecha_inicio, "$lte": fecha_fin}
     elif fecha_inicio:
@@ -368,7 +347,7 @@ def search_projects():
     elif fecha_fin:
         filtros["fecha_creacion"] = {"$lte": fecha_fin}
     if pais:
-        filtros["pais"] = {"$regex": pais, "$options": "i"}  # Filtro por país con $regex
+        filtros["pais"] = {"$regex": pais, "$options": "i"}  
 
     # Buscar los proyectos que coincidan con los filtros
     proyectos = mongo.db.proyectos.find(filtros)
@@ -382,7 +361,7 @@ def search_projects():
             "estado": proyecto["estado"],
             "voluntarios": proyecto["voluntarios"],
             "fecha_creacion": proyecto["fecha_creacion"],
-            "pais": proyecto["pais"],  # Incluir el campo pais en la respuesta
+            "pais": proyecto["pais"], 
         })
 
     return jsonify(result), 200
