@@ -1,0 +1,444 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+}
+
+h1, h2 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+p {
+    color: #666;
+    font-size: 14px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 20px 0; /* Más separación para la lista */
+}
+
+li {
+    background: #f9f9f9;
+    padding: 15px; /* Más espacio interno */
+    margin: 10px 0; /* Más separación entre elementos */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px; /* Texto más consistente */
+}
+
+button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 14px; /* Consistencia en el tamaño del texto */
+}
+
+button:hover {
+    background-color: #218838;
+}
+
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+input, textarea {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+    font-family: Arial, sans-serif; /* Consistencia en la fuente */
+}
+
+textarea {
+    resize: none;
+}
+
+form {
+    margin-top: 20px; /* Separar formulario de otros elementos */
+    font-size: 14px;
+    font-family: Arial, sans-serif; /* Consistencia en la fuente */
+}
+
+label {
+    display: block;
+    text-align: left;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+#logout-btn {
+    background-color: #dc3545;
+    margin-top: 15px; /* Más separación entre botones */
+}
+
+#logout-btn:hover {
+    background-color: #c82333;
+}
+
+h3 {
+    margin-top: 20px; /* Separar título de los botones o formularios */
+}
+
+button + button {
+    margin-left: 10px; /* Separar botones en el mismo contenedor */
+}
+/* General */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    width: 90%;
+    max-width: 600px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+/* Ocultar contenedores dinámicos inicialmente */
+#user-projects-section,
+#available-projects-section,
+#create-project-section {
+    display: none; /* Ocultos por defecto */
+}
+
+/* Botón de cerrar sesión */
+.btn-logout {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.btn-logout:hover {
+    background-color: #c0392b;
+}
+
+.section {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+.btn.edit-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.btn.edit-btn:hover {
+    background-color: #0056b3;
+}
+
+.btn.delete-btn {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn.delete-btn:hover {
+    background-color: #a71d2a;
+}
+#edit-form {
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    margin-top: 10px;
+}
+
+#edit-form label {
+    display: block;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+#edit-form input,
+#edit-form textarea {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.project-list li {
+    background: #f1f1f1;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between; /* Alinea elementos extremos */
+    align-items: center;
+}
+
+.project-list li span {
+    flex-grow: 1; /* Ocupa el espacio restante */
+}
+
+.project-list li button {
+    margin-left: 5px;
+}
+.project-list li .button-group {
+    margin-left: auto; /* Empuja los botones hacia la derecha */
+    display: flex;
+    gap: 10px; /* Añade espacio entre los botones */
+}
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fefefe;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+#edit-form-container {
+    display: none;
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h2, h3 {
+    text-align: center;
+    color: #333;
+}
+
+.section {
+    margin-bottom: 20px;
+}
+
+.project-list {
+    list-style: none;
+    padding: 0;
+}
+
+.project-list li {
+    background: #f1f1f1;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btn {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn-danger {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.btn-primary {
+    background-color: #3498db;
+    color: white;
+}
+
+.btn-success {
+    background-color: #2ecc71;
+    color: white;
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
+
+/* Styles for Edit Form */
+#edit-form-container {
+    background: #f9f9f9;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: none; /* Initially hidden */
+}
+
+#edit-form-container h3 {
+    text-align: center;
+    color: #555;
+}
+
+#edit-project-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+#edit-project-form label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+#edit-project-form input,
+#edit-project-form textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+#edit-project-form button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#edit-project-form button:hover {
+    opacity: 0.9;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    .project-list li {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    #edit-project-form {
+        gap: 5px;
+    }
+}
+.project-details {
+    background-color: #f1f1f1;
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin-top: 10px;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #333;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.project-details p {
+    margin: 8px 0;
+    line-height: 1.5;
+}
+.details-btn, .join-btn, .delete-btn {
+    margin: 5px;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+.details-btn {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+.details-btn:hover {
+    background-color: #218838;
+}
+.join-btn {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+.join-btn:hover {
+    background-color: #0056b3;
+}
+.delete-btn {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+.delete-btn:hover {
+    background-color: #c82333;
+}
+
+.project-details {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+/* Usuarios Registrados */
+.project-list li {
+    list-style: none;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    font-size: 14px;
+}
+
+
