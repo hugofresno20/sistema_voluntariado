@@ -420,7 +420,7 @@ if (window.location.pathname.endsWith("dashboard.html")) {
                         projectDescriptionInput.value = "";
                         projectCountryInput.value = "";
     
-                        loadAvailableProjects();
+                         loadAvailableProjects();
                     })
                     .catch((error) => {
                         console.error("Error al crear proyecto:", error);
