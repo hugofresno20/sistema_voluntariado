@@ -160,7 +160,7 @@ def create_project():
         "descripcion": data["descripcion"],
         "estado": "activo", 
         "voluntarios": [], 
-        "fecha_creacion": datetime.now().isoformat(),  
+        "fecha_creacion": (datetime.now() - timedelta(hours=1)).isoformat(),  
         "pais": data["pais"]
     }
     mongo.db.proyectos.insert_one(nuevo_proyecto)
